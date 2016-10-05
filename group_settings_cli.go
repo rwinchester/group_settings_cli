@@ -51,22 +51,22 @@ func main() {
 	app.Usage = "send commands to the lightworks_client_service"
 	app.Commands = []cli.Command{
 		{
-			Name:      "setSettings",
+			Name:      "setGroupSettings",
 			ArgsUsage: "group_id active_level vacancy_enabled inactive_level vacancy_delay_sec",
 			Usage:     "set settings for a given group",
-			Action:    setSettingsAction,
+			Action:    setGroupSettingsAction,
 		},
 		{
-			Name:      "getSettings",
+			Name:      "getGroupSettings",
 			ArgsUsage: "group_id",
 			Usage:     "retrieve settings for a given group",
-			Action:    getSettingsAction,
+			Action:    getGroupSettingsAction,
 		},
 		{
-			Name:      "getSettingsMap",
+			Name:      "getGroupSettingsMap",
 			ArgsUsage: "group_id",
 			Usage:     "retrieve entire settings map for a given site",
-			Action:    getSettingsMapAction,
+			Action:    getGroupSettingsMapAction,
 		},
 	}
 
@@ -75,7 +75,7 @@ func main() {
 
 // Actions ---------------------------------------------------------------------
 
-func setSettingsAction(c *cli.Context) error {
+func setGroupSettingsAction(c *cli.Context) error {
 	group_id := c.Args().Get(0)
 	active_level := c.Args().Get(1)
 	vacancy_enabled := c.Args().Get(2)
@@ -95,7 +95,7 @@ func setSettingsAction(c *cli.Context) error {
 	return nil
 }
 
-func getSettingsAction(c *cli.Context) error {
+func getGroupSettingsAction(c *cli.Context) error {
 	group_id := c.Args().Get(0)
 
 	request := GroupSettingsCommand{GroupID: group_id, Procedure: "getSettings", Params: map[string]interface{}{}}
@@ -109,7 +109,7 @@ func getSettingsAction(c *cli.Context) error {
 	return nil
 }
 
-func getSettingsMapAction(c *cli.Context) error {
+func getGroupSettingsMapAction(c *cli.Context) error {
 	group_id := c.Args().Get(0)
 
 	request := GroupSettingsCommand{GroupID: group_id, Procedure: "getSettingsMapAction", Params: map[string]interface{}{}}
